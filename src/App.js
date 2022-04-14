@@ -10,7 +10,6 @@ export default function App(){
   
     return (
       <div>
-  
       
       {showBot&&
       <div className='flex flex-col  h-full w-full z-50 px-5 py-10 fixed right-0 bottom-0 top-0  justify-start  bg-white  drop-shadow self-end md:w-1/3 top-auto lg:h-3/4 px-0 py-0'>
