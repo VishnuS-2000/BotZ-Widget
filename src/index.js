@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 //const root = ReactDOM.createRoot(document.getElementById('root'));
 const WidgetDivs=document.querySelectorAll(".chatbot")
 
+console.log(WidgetDivs)
+
 //const WidgetDivs = document.querySelectorAll('.reddit_widget')
 
 //Inject our React App into each
