@@ -1,7 +1,7 @@
 {
   "name": "my-widget",
   "version": "0.1.0",
-  "homepage": "https:vishnus-2000/BotZ-Widget.github.io",
+  "homepage": "https://VishnuS-2000.github.io/BotZ-Widget",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.0",
