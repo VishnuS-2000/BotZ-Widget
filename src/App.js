@@ -6,19 +6,27 @@ import {db} from "./firebase"
 
 import { onSnapshot,doc } from 'firebase/firestore';
 
+import { v4 as uuidv4 } from 'uuid';
+
+
+import chatBot from './chatapiService';
+
+
 
 export default function App({domElement}){
 
 
     const [showBot,setShowBot]=useState(false);
-    const [typing,setTyping]=useState(false)
 
 
-    const [query,setQuery]=useState()
     const [chats,setChats]=useState([])
 
     const [bot,setBot]=useState({})
 
+
+    const[loading,setLoading]=useState(false)
+
+    const [message,setMessage]=useState()
 
     const appId=domElement.getAttribute("appId")
 
@@ -43,6 +51,52 @@ export default function App({domElement}){
 
     },[])
 
+
+
+  const getResponse=async(intents,query)=>{
+
+
+    const training_data={
+        'data':{
+            'intents':intents
+        },
+        'query':query
+    }
+
+    
+
+    
+
+    const data=await chatBot.post("/predict",training_data)
+  
+    if(data){
+      setLoading(false)
+    }
+
+    console.log(data)
+   return data.data 
+    
+    }
+
+
+    const handleSubmit=async(e)=>{
+        e.preventDefault()
+        console.log(message)
+
+
+      
+  
+        setLoading(true)
+        const data=await getResponse(bot.intents,message)
+
+        console.log(data)
+        setChats([...chats,{id:uuidv4(),message:message,bot:false},{id:uuidv4(),message:data.reply,bot:true}])
+
+        setMessage("")
+
+    
+
+    }
   
     return (
       <div>
@@ -52,8 +106,8 @@ export default function App({domElement}){
         
         {/* Chatbot Header */}
   
-        <div className="flex justify-between items-center w-full p-4   bg-gradient-to-r from-blue-500 to-indigo-800">
-          <h1 className="text-2xl font-extrabold text-gray-50">BOT Z</h1>
+        <div className="flex justify-between items-center w-full p-4   bg-gradient-to-r from-blue-500 to-indigo-800 ">
+          <h1 className="text-2xl font-extrabold text-gray-50">{bot?.name}</h1>
 
           <button className="text-2xl font-extrabold text-gray-50 " onClick={()=>{setShowBot(false)}}><MoreHorizIcon style={{fontSize:"2.5rem"}}/></button>
   
@@ -65,22 +119,34 @@ export default function App({domElement}){
   
           <div className="flex relative top-0 bottom-50 w-full h-full flex-col overflow-y-auto  p-10">
   
-          <Chat content='Machine Learning ' bot={true}/>
-          <Chat content='Deep Learning' bot={false}/>
-          <Chat content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ligula in lorem porttitor elementum. Integer condimentum vehicula odio, at ornare ante porttitor eu.  " bot={false}/>
-          <Chat content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ligula in lorem porttitor elementum. Integer condimentum vehicula odio, at ornare ante porttitor eu.  " bot={true}/>
-          <Chat content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ligula in lorem porttitor elementum. Integer condimentum vehicula odio, at ornare ante porttitor eu.  " bot={false}/>
-          <Chat content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac ligula in lorem porttitor elementum. Integer condimentum vehicula odio, at ornare ante porttitor eu.  " bot={true}/>
-  
-  
+
+          {chats.map((chat)=>{
+
+                return <Chat key={chat.id} bot={chat.bot} content={chat.message}/>
+
+
+          })}
+
+          {loading&&<>
+            
+            <Chat key={uuidv4()} bot={false} content={message}/>
+            <Chat key={uuidv4()} bot={true} content={null}/>
+
+            </>}
+
+
+        
+
           </div>
   
   
                {/* Chatbot Input Section */}
   
           <div className="flex justify-evenly bottom-0  w-full relative border-t border-gray-300 bg-gray-50">
-          <input type="text" className="p-5 h-full w-full outline-none  rounded-lg text-lg md:text-xl" placeholder="Type a Message" onChange={()=>{setTyping(true)}}/>
-          {typing&&<button className="relative py-2 px-4 rounded-full  drop-shadow cursor-pointer"><SendIcon style={{fontSize:"2rem",color:"blue"}}/></button>}
+    
+          <input type="text" className="p-5 h-full w-full outline-none  rounded-lg text-lg md:text-xl" value={message} placeholder="Type a Message" onChange={(e)=>{setMessage(e.target.value)}}/>
+          {message&&<button type="submit" className="relative py-2 px-4 rounded-full  drop-shadow cursor-pointer" onClick={handleSubmit}><SendIcon style={{fontSize:"2rem",color:"blue"}}/></button>}
+
           </div>
       
   
@@ -103,12 +169,24 @@ export default function App({domElement}){
 
 function Chat({content,bot}){
 
+const [loading,setLoading]=useState(true)
 
+
+useEffect(()=>{
+
+  if(content){
+    setLoading(false)
+  }
+
+},[])
 
   return <div className={bot?"flex flex-wrap  text-gray-100  p-3 max-w-xs m-2 bg-gradient-to-r from-blue-500 to-indigo-800 rounded-tl-2xl rounded-br-2xl rounded-tr-2xl self-start":"flex flex-wrap max-w-xs p-5 m-2 bg-gray-200 border rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl self-end"}>
       
-      <p className="text-sm font-bold lg:text-lg">{content}</p>
-  </div>
+    {loading?<p className='text-sm font-medium lg:text-lg'>...</p>:<p className="text-sm font-medium lg:text-lg">{content}</p>}
+     
+    </div>
+
+
 
 
 
