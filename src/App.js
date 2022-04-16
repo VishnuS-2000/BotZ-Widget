@@ -2,22 +2,59 @@ import React ,{useState,useEffect} from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
-export default function App(){
+import {db} from "./firebase"
+
+import { onSnapshot,doc } from 'firebase/firestore';
+
+
+export default function App({domElement}){
 
 
     const [showBot,setShowBot]=useState(false);
     const [typing,setTyping]=useState(false)
+
+
+    const [query,setQuery]=useState()
+    const [chats,setChats]=useState([])
+
+    const [bot,setBot]=useState({})
+
+
+    const appId=domElement.getAttribute("appId")
+
+    const docRef=doc(db,"users",appId)
+
+
+    useEffect(()=>{
+
+      const unsub=onSnapshot(docRef,(snapshot)=>{
+
+            if(snapshot.exists()){
+
+                setBot(snapshot.data().bot)
+
+            }
+
+        console.log(snapshot.data())
+
+
+      })
+
+
+    },[])
+
   
     return (
       <div>
       
       {showBot&&
-      <div className='flex flex-col  h-full w-full z-50 px-5 py-10 fixed right-0 bottom-0 top-0  justify-start  bg-white  drop-shadow self-end md:w-1/3 top-auto lg:h-3/4 px-0 py-0'>
+      <div className='flex flex-col  h-full w-full z-50  fixed right-0 bottom-0 top-0  justify-start  bg-white border self-end md:w-1/3 top-auto lg:h-3/4 px-0 py-0'>
         
         {/* Chatbot Header */}
   
         <div className="flex justify-between items-center w-full p-4   bg-gradient-to-r from-blue-500 to-indigo-800">
           <h1 className="text-2xl font-extrabold text-gray-50">BOT Z</h1>
+
           <button className="text-2xl font-extrabold text-gray-50 " onClick={()=>{setShowBot(false)}}><MoreHorizIcon style={{fontSize:"2.5rem"}}/></button>
   
        
@@ -42,8 +79,8 @@ export default function App(){
                {/* Chatbot Input Section */}
   
           <div className="flex justify-evenly bottom-0  w-full relative border-t border-gray-300 bg-gray-50">
-          <input type="text" className="p-5 h-full w-3/4 outline-none  rounded-lg text-lg md:text-xl" placeholder="Type a Message" onChange={()=>{setTyping(true)}}/>
-          {typing&&<button className="relative py-2 px-4 "><SendIcon style={{fontSize:"2rem",color:"blue"}}/></button>}
+          <input type="text" className="p-5 h-full w-full outline-none  rounded-lg text-lg md:text-xl" placeholder="Type a Message" onChange={()=>{setTyping(true)}}/>
+          {typing&&<button className="relative py-2 px-4 rounded-full  drop-shadow cursor-pointer"><SendIcon style={{fontSize:"2rem",color:"blue"}}/></button>}
           </div>
       
   
