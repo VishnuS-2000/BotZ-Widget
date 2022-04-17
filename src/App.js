@@ -55,7 +55,7 @@ export default function App({domElement}){
 
 
 
-  const getResponse=async(intents,query)=>{
+  const getResponse=(intents,query)=>{
 
 
     const training_data={
@@ -69,7 +69,7 @@ export default function App({domElement}){
 
     
 
-    const data=await chatBot.post("/predict",training_data)
+    const data=chatBot.post("/predict",training_data)
   
     if(data){
       setLoading(false)
@@ -95,11 +95,11 @@ export default function App({domElement}){
     }
 
 
-    const handleSubmit=async(e)=>{
+    const handleSubmit=(e)=>{
         e.preventDefault()
         
         setLoading(true)
-        const data=await getResponse(bot.intents,message)
+        const data=getResponse(bot.intents,message)
 
         console.log(data)
         setChats([...chats,{id:uuidv4(),message:message,bot:false},{id:uuidv4(),message:data.reply,bot:true}])
