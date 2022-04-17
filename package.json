@@ -32,7 +32,7 @@
     "build": "craco build",
     "test": "craco test",
     "build:widget": "craco build && parcel build src/index.js --no-source-maps -d public/docs",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build:widget",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
     "parcel-bundler": "^1.12.4"
   }
 }
