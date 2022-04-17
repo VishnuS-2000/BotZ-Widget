@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import chatBot from './chatapiService';
 
+import logo from "./assets/images/botz.png"
 
 
 export default function App({domElement}){
@@ -79,14 +80,24 @@ export default function App({domElement}){
     
     }
 
+    const handleChange=(e)=>{
+
+      setMessage(e.target.value)
+      
+    }
+
+    const handlePress=(e)=>{
+
+      if(e.key=="Enter"){
+        handleSubmit(e)
+      }
+
+    }
+
 
     const handleSubmit=async(e)=>{
         e.preventDefault()
-        console.log(message)
-
-
-      
-  
+        
         setLoading(true)
         const data=await getResponse(bot.intents,message)
 
@@ -105,11 +116,11 @@ export default function App({domElement}){
       <div>
       
       {showBot&&
-      <div className='flex flex-col  h-full w-full z-50  fixed right-0 bottom-0 top-0  justify-start  bg-white border self-end md:w-1/3 top-auto lg:h-3/4 px-0 py-0'>
+      <div className='flex flex-col  h-full w-full z-50  fixed right-0 bottom-0 top-0 rounded-3xl  justify-start  bg-white border self-end md:w-1/3 top-auto  lg:h-3/4 px-0 py-0'>
         
         {/* Chatbot Header */}
   
-        <div className={`flex justify-between items-center w-full p-4   bg-gradient-to-r ${bot.theme.start} ${bot.theme.end}`}>
+        <div className={`flex justify-between items-center w-full p-4 rounded-tr-xl rounded-tl-xl   bg-gradient-to-r ${bot.theme.start} ${bot.theme.end}`}>
           <h1 className="text-2xl  text-gray-50">{bot?.name}</h1>
 
         <button className="text-2xl font-extrabold text-gray-50 " onClick={()=>{setShowBot(false)}}><MoreHorizIcon style={{fontSize:"2.5rem"}}/></button>
@@ -147,8 +158,8 @@ export default function App({domElement}){
   
           <div className="flex justify-evenly py-2 bottom-0  w-full relative border-t border-gray-300 bg-gray-50">
     
-          <input type="text" className="p-5 h-full w-full outline-none  rounded-lg text-lg md:text-xl" value={message} placeholder="Type a Message" onChange={(e)=>{setMessage(e.target.value)}} />
-          {message&&<button type="submit" className={`px-5 py-3 rounded-full mr-5 drop-shadow cursor-pointer bg-gradient-to-r ${bot.theme.start} ${bot.theme.end}`} onClick={handleSubmit}><SendIcon style={{fontSize:"1.rem",color:"white"}}/></button>}
+          <input type="text" className="p-5 h-full w-full outline-none  rounded-lg text-lg md:text-xl" value={message} placeholder="Type a Message" onChange={handleChange} onKeyPress={handlePress} />
+          {message&&<button type="submit" className={`px-5 py-3 rounded-full mr-5 drop-shadow cursor-pointer bg-gradient-to-r ${bot.theme.start} ${bot.theme.end}`} onClick={handleSubmit} ><SendIcon style={{fontSize:"1.rem",color:"white"}}/></button>}
 
           </div>
       
@@ -157,8 +168,8 @@ export default function App({domElement}){
   
                {/* Chatbot Show */}
         
-        {!showBot&&<button className={`bg-gradient-to-r from-blue-500 to-indigo-800 px-5 py-3 rounded-full text-2xl font-bold fixed bottom-5 right-5 z-50`} onClick={()=>{setShowBot(!showBot)}}>
-            <h1>Z</h1>
+        {!showBot&&<button className={`  rounded-full text-2xl font-bold fixed bottom-5 right-5 z-50`} onClick={()=>{setShowBot(!showBot)}}>
+            <img src={logo} width={60} height={60} className=""/>
           </button>}
   
   
