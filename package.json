@@ -30,7 +30,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "build:widget": "craco build && parcel build src/index.js --no-source-maps -d build",
+    "build:widget": "craco build && parcel build src/index.js --no-source-maps -d public",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
