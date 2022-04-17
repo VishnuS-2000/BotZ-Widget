@@ -5,22 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 //const root = ReactDOM.createRoot(document.getElementById('root'));
-const WidgetDivs=document.querySelectorAll(".chatbot")
+const Div=document.querySelector(".chatbot")
 
-console.log(WidgetDivs)
+console.log("Div: ", Div)
 
 //const WidgetDivs = document.querySelectorAll('.reddit_widget')
 
 //Inject our React App into each
-WidgetDivs.forEach(Div=> {
+ReactDOM.render(
+  <React.StrictMode>
+  <App domElement={Div}/>
+  </React.StrictMode>,
+Div
+);
+// WidgetDivs.forEach(Div=> {
   
-  return ReactDOM.render(
-      <React.StrictMode>
-      <App domElement={Div}/>
-      </React.StrictMode>,
-    Div
-  );
-})
+//   return
+// })
 
 
 // root.render(
