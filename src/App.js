@@ -24,7 +24,6 @@ export default function App({domElement}){
 
     const [bot,setBot]=useState({})
 
-
     const[loading,setLoading]=useState(false)
 
     const [message,setMessage]=useState("")
@@ -96,8 +95,7 @@ export default function App({domElement}){
 
 
     const handleSubmit=async(e)=>{
-        e.preventDefault()
-        
+        e.preventDefault()        
         setLoading(true)
         const data=await getResponse(bot.intents,message)
 
@@ -105,7 +103,6 @@ export default function App({domElement}){
         setChats([...chats,{id:uuidv4(),message:message,bot:false},{id:uuidv4(),message:data.reply,bot:true}])
 
         setMessage("")
-
     
 
     }

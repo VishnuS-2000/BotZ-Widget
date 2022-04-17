@@ -4,6 +4,7 @@
   "homepage": "https://VishnuS-2000.github.io/BotZ-Widget",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.17.9",
     "@craco/craco": "^6.1.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
