@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
+
 import {db} from "./firebase"
 
 import { onSnapshot,doc } from 'firebase/firestore';
@@ -11,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import chatBot from './chatapiService';
 
-import logo from "./assets/images/botz.png"
+import logo from "./botz.png"
 
 
 export default function App({domElement}){
@@ -166,7 +167,7 @@ export default function App({domElement}){
                {/* Chatbot Show */}
         
         {!showBot&&<button className={`  rounded-full text-2xl font-bold fixed bottom-5 right-5 z-50`} onClick={()=>{setShowBot(!showBot)}}>
-            <img src={logo} width={60} height={60} className=""/>
+            <img src={logo} width={60} height={60} alt="there is imag here " className=""/>
           </button>}
   
   
