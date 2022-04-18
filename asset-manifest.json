@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/BotZ-Widget/static/css/main.08805665.chunk.css",
-    "main.js": "/BotZ-Widget/static/js/main.28740e07.chunk.js",
-    "main.js.map": "/BotZ-Widget/static/js/main.28740e07.chunk.js.map",
+    "main.js": "/BotZ-Widget/static/js/main.0ac28900.chunk.js",
+    "main.js.map": "/BotZ-Widget/static/js/main.0ac28900.chunk.js.map",
     "runtime-main.js": "/BotZ-Widget/static/js/runtime-main.6bdbfc9c.js",
     "runtime-main.js.map": "/BotZ-Widget/static/js/runtime-main.6bdbfc9c.js.map",
-    "static/js/2.4e560be4.chunk.js": "/BotZ-Widget/static/js/2.4e560be4.chunk.js",
-    "static/js/2.4e560be4.chunk.js.map": "/BotZ-Widget/static/js/2.4e560be4.chunk.js.map",
+    "static/js/2.ae631b99.chunk.js": "/BotZ-Widget/static/js/2.ae631b99.chunk.js",
+    "static/js/2.ae631b99.chunk.js.map": "/BotZ-Widget/static/js/2.ae631b99.chunk.js.map",
     "static/js/3.b26d3596.chunk.js": "/BotZ-Widget/static/js/3.b26d3596.chunk.js",
     "static/js/3.b26d3596.chunk.js.map": "/BotZ-Widget/static/js/3.b26d3596.chunk.js.map",
     "index.html": "/BotZ-Widget/index.html",
     "static/css/main.08805665.chunk.css.map": "/BotZ-Widget/static/css/main.08805665.chunk.css.map",
-    "static/js/2.4e560be4.chunk.js.LICENSE.txt": "/BotZ-Widget/static/js/2.4e560be4.chunk.js.LICENSE.txt",
+    "static/js/2.ae631b99.chunk.js.LICENSE.txt": "/BotZ-Widget/static/js/2.ae631b99.chunk.js.LICENSE.txt",
     "static/media/botz.b8ef0ed6.png": "/BotZ-Widget/static/media/botz.b8ef0ed6.png"
   },
   "entrypoints": [
     "static/js/runtime-main.6bdbfc9c.js",
-    "static/js/2.4e560be4.chunk.js",
+    "static/js/2.ae631b99.chunk.js",
     "static/css/main.08805665.chunk.css",
-    "static/js/main.28740e07.chunk.js"
+    "static/js/main.0ac28900.chunk.js"
   ]
 }
