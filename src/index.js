@@ -7,7 +7,7 @@ import "babel-polyfill"
 import reportWebVitals from './reportWebVitals';
 
 //const root = ReactDOM.createRoot(document.getElementById('root'));
-const Div=document.getElementById("chatbot")
+const Div=document.querySelector(".chatbot")
 
 console.log("Div: ", Div)
 
